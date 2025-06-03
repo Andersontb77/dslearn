@@ -1,12 +1,16 @@
 package com.anderson.dslearn.entities;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
 @Entity
@@ -20,6 +24,9 @@ public class Course implements Serializable {
 	private String name;
 	private String imgUri;
 	private String imgGrayUri;
+	
+	@OneToMany(mappedBy = "course")
+	private List<Offer> offers = new ArrayList<>();
 	
 	public Course() {
 		
@@ -62,6 +69,11 @@ public class Course implements Serializable {
 
 	public void setImgGrayUri(String imgGrayUri) {
 		this.imgGrayUri = imgGrayUri;
+	}
+	
+	
+	public List<Offer> getOffers() {
+		return offers;
 	}
 
 	@Override
